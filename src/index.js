@@ -17,9 +17,10 @@ handlebarsConfig(app);
 
 app.use(homeController);
 app.use('/cubes', cubeController);
-app.get('*', (req, res) => {
-    res.redirect('/404');
-});
+
+// app.get('*', (req, res) => {
+//     res.redirect('/404');
+// });
 
 //app.get('/', homeController.getHome);
 // require('./config/expressConfig')(app); => this works!!!
