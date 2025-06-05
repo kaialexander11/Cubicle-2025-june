@@ -4,11 +4,8 @@ const cubeManager = require('../managers/cubeManager.js');
 
 // Path /cubes/create
 router.get('/create', (req, res) => {
-
     //console.log(cubeManager.getAll());
-
     res.render('create');
-
 });
 
 router.post('/create', (req, res) => {
@@ -22,7 +19,6 @@ router.post('/create', (req, res) => {
 
     } = req.body;
 
-    //
     // console.log(req.body);
 
     cubeManager.create({
@@ -33,8 +29,11 @@ router.post('/create', (req, res) => {
         difficultyLevel: Number(difficultyLevel),
 
     });
+
     //res.send('Form submitted!');
+
     res.redirect('/');
+    
 });
 
 router.get('/:cubeId/details', (req, res) => {

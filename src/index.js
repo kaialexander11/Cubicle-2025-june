@@ -1,10 +1,13 @@
 const express = require('express');
-// const handlebars = require('express-handlebars');
 const path = require('path');
+
+
 
 const expressConfig = require('./config/expressConfig');
 const handlebarsConfig = require('./config/handlebarsConfig');
+const dbConnect = require('./config/dbConfig');
 const routes = require('./routes');
+
 
 const app = express();
 const PORT = 5000;
@@ -13,11 +16,14 @@ const PORT = 5000;
 expressConfig(app);
 handlebarsConfig(app);
 
+
+dbConnect()
+    .then(() => console.log('DB Connected successfully'))
+    .catch(err => {
+        console.log('DB error: ', err);
+    });
+
 app.use(routes);
 
-//app.get('/', homeController.getHome);
-// require('./config/expressConfig')(app); => this works!!!
-// Express config:
-// app.use(express.static('src/public')); => this works!
-
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}... `));
+
