@@ -39,4 +39,11 @@ router.post('/create', (req, res) => {
 
 });
 
+router.get('/:cubeId/details', (req, res) => {
+
+    const cube = cubeManager.getOne(req.params.cubeId);
+    res.render('details', { cube });
+
+});
+
 module.exports = router;
