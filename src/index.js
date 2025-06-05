@@ -17,12 +17,13 @@ handlebarsConfig(app);
 
 app.use(homeController);
 app.use('/cubes', cubeController);
-
+app.get('*', (req, res) => {
+    res.redirect('/404');
+});
 
 //app.get('/', homeController.getHome);
 // require('./config/expressConfig')(app); => this works!!!
 // Express config:
 // app.use(express.static('src/public')); => this works!
-
 
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}... `));
