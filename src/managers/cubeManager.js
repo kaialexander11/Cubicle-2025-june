@@ -5,6 +5,7 @@ const Cube = require('../models/Cube.js');
 exports.getAll = async (search, from, to) => {
 
     //let result = cubes.slice();
+
     let result = await Cube.find().lean();
 
     //TODO: use mongoose to filter in the db!
@@ -27,9 +28,11 @@ exports.getAll = async (search, from, to) => {
 exports.getOne = (cubeId) => Cube.findById(cubeId);
 
 exports.create = async (cubeData) => {
-
+    
     const cube = new Cube(cubeData);
+
     await cube.save();
+
     return cube;
 
 };  
