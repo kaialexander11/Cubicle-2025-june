@@ -4,11 +4,13 @@ const cubeManager = require('../managers/cubeManager.js');
 
 // Path /cubes/create
 router.get('/create', (req, res) => {
+
     //console.log(cubeManager.getAll());
     res.render('create');
+    
 });
 
-router.post('/create', (req, res) => {
+router.post('/create', async (req, res) => {
 
     const { 
 
@@ -17,11 +19,11 @@ router.post('/create', (req, res) => {
         imageUrl, 
         difficultyLevel, 
 
-    } = req.body;
+    } = req.body; 
 
     // console.log(req.body);
-
-    cubeManager.create({
+                    
+    await cubeManager.create({
 
         name,
         description,
@@ -31,19 +33,17 @@ router.post('/create', (req, res) => {
     });
 
     //res.send('Form submitted!');
-
     res.redirect('/');
     
 });
 
-router.get('/:cubeId/details', (req, res) => {
+router.get('/:cubeId/details', async (req, res) => {
 
-    const cube = cubeManager.getOne(req.params.cubeId);
-
+    const cube = await cubeManager.getOne(req.params.cubeId).lean();
+                
     if (!cube) {
-       return res.redirect('/404'); 
+       return res.redirect('/404');
     }
-
     res.render('details', { cube });
 
 });
