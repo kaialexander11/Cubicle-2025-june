@@ -7,13 +7,12 @@ exports.getAll = async (search, from, to) => {
     //let result = cubes.slice();
     let result = await Cube.find().lean();
 
-
-    //TODO: use mongoose to filter in the db
+    //TODO: use mongoose to filter in the db!
 
     if (search) {
         result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
     }
-
+            
     if (from) {
         result = result.filter(cube => cube.difficultyLevel >= Number(from));
     }
@@ -24,10 +23,6 @@ exports.getAll = async (search, from, to) => {
 
     return result;
 };
-
-//exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId);
-//exports.getOneLean = (cubeId) => this.getOne(cubeId).lean();
-//exports.getOne = (cubeId) => Cube.findById(cubeId).lean();
 
 exports.getOne = (cubeId) => Cube.findById(cubeId);
 
